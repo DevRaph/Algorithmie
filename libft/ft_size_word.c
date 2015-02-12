@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_size_word.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/05 18:01:14 by rpinet            #+#    #+#             */
-/*   Updated: 2014/12/29 20:47:34 by rpinet           ###   ########.fr       */
+/*   Created: 2014/11/26 17:13:19 by rpinet            #+#    #+#             */
+/*   Updated: 2014/11/26 17:14:20 by rpinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
-char		*ft_strdup(const char *s)
+size_t	ft_size_word(char const *s, char *c)
 {
-	char	*copy;
-	char	*ptr;
 	int		size;
 
-	ptr = (char *)s;
 	size = 0;
-	copy = (char *)malloc(sizeof(char) * ft_strlen(s) + 1);
-	while (ptr[size])
+	while (ft_strncmp(s, c, (size_t)ft_strlen(c)) != 0 && *s != '\0')
 	{
-		copy[size] = ptr[size];
+		s++;
 		size++;
 	}
-	copy[size] = '\0';
-	return (copy);
+	return (size);
 }

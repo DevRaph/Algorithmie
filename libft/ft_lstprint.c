@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_lstprint.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/05 18:01:14 by rpinet            #+#    #+#             */
-/*   Updated: 2014/12/29 20:47:34 by rpinet           ###   ########.fr       */
+/*   Created: 2014/12/03 16:24:57 by rpinet            #+#    #+#             */
+/*   Updated: 2014/12/03 16:24:58 by rpinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
-char		*ft_strdup(const char *s)
+void	ft_lstprint(t_list **my_list)
 {
-	char	*copy;
-	char	*ptr;
-	int		size;
+	t_list	*ptr;
 
-	ptr = (char *)s;
-	size = 0;
-	copy = (char *)malloc(sizeof(char) * ft_strlen(s) + 1);
-	while (ptr[size])
+	if (!(ptr = *my_list))
 	{
-		copy[size] = ptr[size];
-		size++;
+		ft_putchar('\n');
+		while (ptr->next)
+		{
+			ft_putchar('[');
+			ft_putstr((char *)ptr->content);
+			ft_putstr("] ");
+			ptr = ptr->next;
+		}
+		ft_putchar('\n');
 	}
-	copy[size] = '\0';
-	return (copy);
 }

@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_nbrlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/05 18:01:14 by rpinet            #+#    #+#             */
-/*   Updated: 2014/12/29 20:47:34 by rpinet           ###   ########.fr       */
+/*   Created: 2014/11/26 16:50:19 by rpinet            #+#    #+#             */
+/*   Updated: 2014/11/26 17:01:10 by rpinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "libft.h"
-
-char		*ft_strdup(const char *s)
+int		ft_nbrlen(int nb)
 {
-	char	*copy;
-	char	*ptr;
-	int		size;
+	int i;
 
-	ptr = (char *)s;
-	size = 0;
-	copy = (char *)malloc(sizeof(char) * ft_strlen(s) + 1);
-	while (ptr[size])
+	if (nb < 0)
+		nb = -(nb);
+	i = 0;
+	while (nb > 0)
 	{
-		copy[size] = ptr[size];
-		size++;
+		nb /= 10;
+		i++;
 	}
-	copy[size] = '\0';
-	return (copy);
+	return (i);
 }

@@ -1,32 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_convert_base.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/05 18:01:14 by rpinet            #+#    #+#             */
-/*   Updated: 2014/12/29 20:47:34 by rpinet           ###   ########.fr       */
+/*   Created: 2015/01/06 15:07:28 by rpinet            #+#    #+#             */
+/*   Updated: 2015/01/06 15:08:32 by rpinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
+#include <stdlib.h>
 
-char		*ft_strdup(const char *s)
+char		*ft_convert_base(char *nbr, int bf, int bt)
 {
-	char	*copy;
-	char	*ptr;
-	int		size;
+	int		i;
+	char	*res;
+	int		convert;
+	char	*base_to;
 
-	ptr = (char *)s;
-	size = 0;
-	copy = (char *)malloc(sizeof(char) * ft_strlen(s) + 1);
-	while (ptr[size])
+	i = 0;
+	res = ft_strnew(64);
+	base_to = ft_get_base(bt);
+	convert = ft_atoi_base(nbr, bf);
+	while (convert > 0)
 	{
-		copy[size] = ptr[size];
-		size++;
+		*(res + i++) = base_to[convert % ft_strlen(base_to)];
+		convert /= ft_strlen(base_to);
 	}
-	copy[size] = '\0';
-	return (copy);
+	*(res + i++) = '\0';
+	free(base_to);
+	return (ft_strrev(res));
 }

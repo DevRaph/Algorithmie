@@ -25,7 +25,9 @@ SRC = 	ft_abs.c ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 	ft_strmap.c ft_strmapi.c ft_strncat.c ft_strncmp.c ft_strncpy.c \
 	ft_strndup.c ft_strnequ.c ft_strnew.c ft_strnstr.c ft_strrchr.c \
 	ft_strsplit.c ft_strstr.c ft_strsub.c ft_strtrim.c ft_swap.c \
-	ft_tolower.c ft_toupper.c
+	ft_tolower.c ft_toupper.c \
+	get_next_line.c ft_mallocat.c \
+	ft_atoi_base.c ft_convert_base.c ft_get_base.c ft_strpos.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -37,7 +39,7 @@ $(NAME):
 	@ranlib $(NAME)
 
 clean:
-	@echo "\033[35;1m• \033[0mRemoving object files ...\033[55G\c"
+	@echo "\033[35;1m• \033[0mRemoving object files in libft ...\033[55G\c"
 	@rm -f $(OBJ)
 	@echo "\033[37;1m[\033[32mOK !\033[37m]\033[0m"
 

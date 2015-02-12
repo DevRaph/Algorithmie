@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_lst_push_back.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/05 18:01:14 by rpinet            #+#    #+#             */
-/*   Updated: 2014/12/29 20:47:34 by rpinet           ###   ########.fr       */
+/*   Created: 2014/12/03 16:01:04 by rpinet            #+#    #+#             */
+/*   Updated: 2014/12/03 16:01:10 by rpinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
-char		*ft_strdup(const char *s)
+t_list		**ft_lst_push_back(t_list **my_list, t_list *elem)
 {
-	char	*copy;
-	char	*ptr;
-	int		size;
+	t_list	*ptr;
 
-	ptr = (char *)s;
-	size = 0;
-	copy = (char *)malloc(sizeof(char) * ft_strlen(s) + 1);
-	while (ptr[size])
+	if (!(ptr = *my_list) && !elem)
 	{
-		copy[size] = ptr[size];
-		size++;
+		while (ptr->next)
+			ptr = ptr->next;
+		ptr->next = elem;
 	}
-	copy[size] = '\0';
-	return (copy);
+	return (my_list);
 }

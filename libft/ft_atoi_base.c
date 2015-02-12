@@ -1,34 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strndup.c                                       :+:      :+:    :+:   */
+/*   ft_atoi_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/05 18:01:14 by rpinet            #+#    #+#             */
-/*   Updated: 2014/11/26 15:01:47 by rpinet           ###   ########.fr       */
+/*   Created: 2015/01/06 15:11:22 by rpinet            #+#    #+#             */
+/*   Updated: 2015/01/06 15:11:42 by rpinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
 
-char		*ft_strndup(char const *s, size_t n)
+int		ft_atoi_base(char *s, int b)
 {
-	char	*copy;
-	char	*ptr;
-	size_t	size;
+	int		abs;
+	int		total;
+	int		i;
+	char	*base;
 
-	if (!s)
-		return (NULL);
-	ptr = (char *)s;
-	size = 0;
-	copy = (char *)malloc(sizeof(char) * ft_strlen(s) + 1);
-	while (s && *s && size < n)
-	{
-		copy[size] = ptr[size];
-		size++;
-	}
-	copy[size] = '\0';
-	return (copy);
+	i = 0;
+	s = ft_strdup(s);
+	base = ft_get_base(b);
+	while (ft_isspace(*(s + i)))
+		i++;
+	abs = 1;
+	if (*s == '-')
+		abs = -1 * (*(s + i++) == '-');
+	else if (*(s + i) == '+')
+		i++;
+	total = 0;
+	while (ft_strpos(base, *(s + i)) != ~(!abs))
+		total = total * ft_strlen(base) + ft_strpos(base, *(s + i++));
+	free(s);
+	free(base);
+	return (total * abs);
 }

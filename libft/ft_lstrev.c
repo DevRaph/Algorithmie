@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_lstrev.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/05 18:01:14 by rpinet            #+#    #+#             */
-/*   Updated: 2014/12/29 20:47:34 by rpinet           ###   ########.fr       */
+/*   Created: 2014/12/03 16:24:19 by rpinet            #+#    #+#             */
+/*   Updated: 2015/01/06 14:17:46 by rpinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
+#include <string.h>
 
-char		*ft_strdup(const char *s)
+static void			ft_lstrev(t_lst **head_ref)
 {
-	char	*copy;
-	char	*ptr;
-	int		size;
+	t_lst			*prev;
+	t_lst			*current;
+	t_lst			*next;
 
-	ptr = (char *)s;
-	size = 0;
-	copy = (char *)malloc(sizeof(char) * ft_strlen(s) + 1);
-	while (ptr[size])
+	prev = NULL;
+	current = *head_ref;
+	while (current != NULL)
 	{
-		copy[size] = ptr[size];
-		size++;
+		next = current->next;
+		current->next = prev;
+		prev = current;
+		current = next;
 	}
-	copy[size] = '\0';
-	return (copy);
+	*head_ref = prev;
 }

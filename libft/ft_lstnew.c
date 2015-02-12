@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/05 18:01:14 by rpinet            #+#    #+#             */
-/*   Updated: 2014/12/29 20:47:34 by rpinet           ###   ########.fr       */
+/*   Created: 2014/12/03 15:25:44 by rpinet            #+#    #+#             */
+/*   Updated: 2014/12/03 15:25:48 by rpinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include <string.h>
 #include "libft.h"
 
-char		*ft_strdup(const char *s)
+t_dlist		*ft_lstnew(int content, int i, int j)
 {
-	char	*copy;
-	char	*ptr;
-	int		size;
+	t_dlist	*ret;
 
-	ptr = (char *)s;
-	size = 0;
-	copy = (char *)malloc(sizeof(char) * ft_strlen(s) + 1);
-	while (ptr[size])
-	{
-		copy[size] = ptr[size];
-		size++;
-	}
-	copy[size] = '\0';
-	return (copy);
+	if (!(ret = (t_dlist *)ft_memalloc(sizeof(t_dlist))))
+		return (NULL);
+	ret->next = NULL;
+	ret->p->z = content;
+	ret->p->x = i;
+	ret->p->y = j;
+	ret->content_size = content_size;
+	return (ret);
 }
