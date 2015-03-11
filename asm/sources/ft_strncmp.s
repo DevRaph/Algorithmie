@@ -1,28 +1,41 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    ft_tolower.s                                       :+:      :+:    :+:    #
+#    ft_strncmp.s                                       :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: rpinet <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2015/02/27 14:54:35 by rpinet            #+#    #+#              #
-#    Updated: 2015/02/27 14:54:36 by rpinet           ###   ########.fr        #
+#    Created: 2015/03/09 20:27:10 by rpinet            #+#    #+#              #
+#    Updated: 2015/03/09 20:27:12 by rpinet           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-global _ft_tolower
-extern _ft_isupper
+	global _ft_strncmp.s
+	section .text
 
-section .text
+_ft_strncmp:
+	xor			rax, rax
+	mov			rcx, -1
 
-_ft_tolower:
-	call		_ft_isupper
-	cmp			al, 0
+loop:
+	inc			rcx
+	cmp			[rdx - 1], rcx
 	je			exit
-	mov			al, dil
-	add			al, 32
+	cmp			byte [rdi + rcx], 0
+	je			exit
+	cmp			byte [rsi + rcx], 0
+	je			exit
+	mov			dl, byte [rdi + rcx]
+	cmp			byte [rsi + rcx], dl
+	je			loop
+			
+exit:
+	mov			al, byte [rdi + rcx]
+	mov			cl, byte [rsi + rcx]
+	sub			al, cl
+	jl			exit_inf
 	ret
 
-exit:
-	mov			al, dil
+exit_inf:
+	mov			rax, -1
 	ret

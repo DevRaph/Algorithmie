@@ -1,28 +1,29 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    ft_tolower.s                                       :+:      :+:    :+:    #
+#    ft_memcpy.s                                        :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: rpinet <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2015/02/27 14:54:35 by rpinet            #+#    #+#              #
-#    Updated: 2015/02/27 14:54:36 by rpinet           ###   ########.fr        #
+#    Created: 2015/03/09 17:26:25 by rpinet            #+#    #+#              #
+#    Updated: 2015/03/09 17:28:29 by rpinet           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-global _ft_tolower
-extern _ft_isupper
+	global _ft_memcpy
+	section .text
 
-section .text
+_ft_memcpy:
+	mov		rcx, rdx
 
-_ft_tolower:
-	call		_ft_isupper
-	cmp			al, 0
-	je			exit
-	mov			al, dil
-	add			al, 32
-	ret
+loop:
+	cmp		rcx, 0
+	jle		exit
+	dec		rcx
+	mov		al, byte [rsi + rcx]
+	mov		byte [rdi + rcx], al
+	jmp		loop
 
 exit:
-	mov			al, dil
+	mov		rax, rdi
 	ret

@@ -1,28 +1,41 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    ft_tolower.s                                       :+:      :+:    :+:    #
+#    ft_puts.s                                          :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: rpinet <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2015/02/27 14:54:35 by rpinet            #+#    #+#              #
-#    Updated: 2015/02/27 14:54:36 by rpinet           ###   ########.fr        #
+#    Created: 2015/03/09 16:09:38 by rpinet            #+#    #+#              #
+#    Updated: 2015/03/09 16:09:40 by rpinet           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-global _ft_tolower
-extern _ft_isupper
+	global _ft_puts
+	extern _ft_putstr
+	extern _ft_putchar
 
-section .text
+	section .text
 
-_ft_tolower:
-	call		_ft_isupper
-	cmp			al, 0
-	je			exit
-	mov			al, dil
-	add			al, 32
+_ft_puts:
+	cmp			rdi, 0
+	je			if_null
+	call		_ft_putstr
+	mov			rdi, 10
+	call		_ft_putchar
 	ret
 
-exit:
-	mov			al, dil
+if_null:
+	mov			rdi, 1
+	lea			rsi, [rel my_null]
+	mov			rdx, 7
+	mov			rax, 0x2000004
+	syscall
+	jc			my_null	
 	ret
+
+error:
+	mov			rax, -1
+	ret
+
+section	.data
+	my_null		db "(null)", 10

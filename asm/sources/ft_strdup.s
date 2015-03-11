@@ -1,28 +1,37 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    ft_tolower.s                                       :+:      :+:    :+:    #
+#    ft_strdup.s                                        :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: rpinet <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2015/02/27 14:54:35 by rpinet            #+#    #+#              #
-#    Updated: 2015/02/27 14:54:36 by rpinet           ###   ########.fr        #
+#    Created: 2015/03/09 18:47:28 by rpinet            #+#    #+#              #
+#    Updated: 2015/03/09 18:47:30 by rpinet           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-global _ft_tolower
-extern _ft_isupper
+	global _ft_strdup
+	extern _ft_strlen
+	extern _malloc
 
-section .text
-
-_ft_tolower:
-	call		_ft_isupper
-	cmp			al, 0
+_ft_strdup:
+	cmp			rdi, 0
 	je			exit
-	mov			al, dil
-	add			al, 32
-	ret
-
+	push		rdi
+	call		_ft_strlen
+	mov			rdi, rax
+	inc			rdi
+	mov			rcx, rax
+	push		rcx
+	call		_malloc
+	cmp			rax, 0
+	je			exit
+	pop			rcx
+	pop			rsi
+	mov			rdi, rax
+	rep			movsb
+# faire pour memcpy pour tester #
+	mov			byte [rdi + rcx], 0
+	
 exit:
-	mov			al, dil
 	ret

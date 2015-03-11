@@ -1,28 +1,26 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    ft_tolower.s                                       :+:      :+:    :+:    #
+#    ft_abs.s                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: rpinet <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2015/02/27 14:54:35 by rpinet            #+#    #+#              #
-#    Updated: 2015/02/27 14:54:36 by rpinet           ###   ########.fr        #
+#    Created: 2015/03/05 16:51:54 by rpinet            #+#    #+#              #
+#    Updated: 2015/03/05 16:51:57 by rpinet           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-global _ft_tolower
-extern _ft_isupper
+global _ft_abs
 
 section .text
 
-_ft_tolower:
-	call		_ft_isupper
-	cmp			al, 0
-	je			exit
-	mov			al, dil
-	add			al, 32
+_ft_abs:
+	cmp		edi, 0
+	jl		exit
+	mov		eax, edi
 	ret
 
 exit:
-	mov			al, dil
+	mov		eax, edi
+	neg		eax
 	ret

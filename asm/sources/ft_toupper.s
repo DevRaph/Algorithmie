@@ -13,13 +13,16 @@
 global _ft_toupper
 extern _ft_islower
 
+section .text
+
 _ft_toupper:
 	call		_ft_islower
-	cmp			rax, 1
+	cmp			al, 0
 	je			exit
-	mov			rax, rdi - 32
+	mov			al, dil
+	sub			al, 32
 	ret
 
 exit:
-	mov			rax, rdi
+	mov			al, dil
 	ret

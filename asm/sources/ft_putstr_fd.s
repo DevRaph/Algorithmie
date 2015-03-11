@@ -1,28 +1,29 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    ft_tolower.s                                       :+:      :+:    :+:    #
+#    ft_putstr_fd.s                                     :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: rpinet <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2015/02/27 14:54:35 by rpinet            #+#    #+#              #
-#    Updated: 2015/02/27 14:54:36 by rpinet           ###   ########.fr        #
+#    Created: 2015/03/09 10:46:22 by rpinet            #+#    #+#              #
+#    Updated: 2015/03/09 10:46:24 by rpinet           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-global _ft_tolower
-extern _ft_isupper
+	global _ft_putstr_fd
+	extern _ft_strlen
 
-section .text
-
-_ft_tolower:
-	call		_ft_isupper
-	cmp			al, 0
-	je			exit
-	mov			al, dil
-	add			al, 32
+_ft_putstr_fd:
+	mov			rdx, rdi
+	call		_ft_strlen
+	mov			rdi, rsi
+	mov			rsi, rdx
+	mov			rdx, rax
+	mov			rax, 0x2000004
+	syscall
+	jc			exit
 	ret
 
 exit:
-	mov			al, dil
+	mov			rax, 0
 	ret

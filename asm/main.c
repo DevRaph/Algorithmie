@@ -71,11 +71,9 @@
 
 
 
-
-
-//# define USE_FT_MIN
-//# define USE_FT_MAX
-//# define USE_FT_ABS
+# define USE_FT_MIN
+# define USE_FT_MAX
+# define USE_FT_ABS
 # define USE_FT_ISUPPER
 # define USE_FT_ISLOWER
 # define USE_FT_BZERO
@@ -84,20 +82,20 @@
 # define USE_FT_ISALNUM
 # define USE_FT_ISASCII
 # define USE_FT_ISPRINT
-//# define USE_FT_TOUPPER
-//# define USE_FT_TOLOWER
-//# define USE_FT_STRLEN
-//# define USE_FT_STRCAT
-//# define USE_FT_PUTS
-//# define USE_FT_PUTSTR
-//# define USE_FT_PUTSTRFD
-//# define USE_FT_PUTCHAR
-//# define USE_FT_PUTCHARFD
-//# define USE_FT_MEMSET
-//# define USE_FT_MEMCPY
-//# define USE_FT_STRDUP
-//# define USE_FT_CAT
-//# define USE_FT_STRCMP
+# define USE_FT_TOUPPER
+# define USE_FT_TOLOWER
+# define USE_FT_STRLEN
+# define USE_FT_STRCAT
+# define USE_FT_PUTS
+# define USE_FT_PUTSTR
+# define USE_FT_PUTSTRFD
+# define USE_FT_PUTCHAR
+# define USE_FT_PUTCHARFD
+# define USE_FT_MEMSET
+# define USE_FT_MEMCPY
+# define USE_FT_STRDUP
+# define USE_FT_CAT
+# define USE_FT_STRCMP
 //# define USE_FT_STRNCMP
 
 
