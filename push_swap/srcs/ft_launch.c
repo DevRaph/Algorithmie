@@ -31,15 +31,14 @@ static int			ft_isint(char *s)
 	}
 	if ((ft_strlen(s) - i) > 10)
 		return (0);
-	j = 0;
+	j = -1;
 	while (s && s[i] != '\0')
 	{
 		if (!ft_isdigit(s[i]))
 			return (0);
-		if (s[i] > tab[j] && ((ft_strlen(s) - a) == 10))
+		if (s[i] > tab[j++] && ((ft_strlen(s) - a) == 10))
 			return (0);
 		i++;
-		j++;
 	}
 	free (tab);
 	return (1);
@@ -56,11 +55,11 @@ static int 			ft_isdbl(char *s, char **av, int a)
 			return (0);
 	}
 	return (1);
-}
+} 
 
-static int		ft_check(char **av, int ac)
+static int			ft_check(char **av, int ac)
 {
-	int			i;
+	int				i;
 
 	i = 0;
 	while (av && av[++i])
@@ -72,15 +71,21 @@ static int		ft_check(char **av, int ac)
 	}
 	(void)ac;
 	return (1);
-}
+} 
 
-void			ft_launch(char **av, int ac)
+void				ft_launch(char **av, int ac)
 {
+	t_stack			*pa;
+	t_stack			*pb;
+
 	if (ft_check(av, ac))
+	{  
 		ft_putendl("good check");
+		pa = ft_create_stack(av, ac);
+		pb = ft_create_stack(NULL, ac);
+		ft_print_stack(*pa);
+		ft_print_stack(*pb);
+	}
 	else
 		ft_putendl("Error");
-
-	(void)ac;
-	(void)av;
 }

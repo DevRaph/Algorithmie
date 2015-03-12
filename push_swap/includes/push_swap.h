@@ -13,13 +13,15 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-typedef struct		s_pile
+typedef struct		s_stack
 {
 	int				size;
 	int				nb;
 	int				*tab;
-}					t_pile;
+}					t_stack;
 
 void				ft_launch(char **av, int ac);
+t_stack				*ft_create_stack(char **av, int ac);
+void				ft_print_stack(t_stack);
 
 #endif
