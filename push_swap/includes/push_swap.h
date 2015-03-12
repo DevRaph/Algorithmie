@@ -20,4 +20,6 @@ typedef struct		s_pile
 	int				*tab;
 }					t_pile;
 
+void				ft_launch(char **av, int ac);
+
 #endif
