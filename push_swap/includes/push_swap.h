@@ -17,11 +17,13 @@ typedef struct		s_stack
 {
 	int				size;
 	int				nb;
+	char			*name;
+	char			*opt;
 	int				*tab;
 }					t_stack;
 
 void				ft_launch(char **av, int ac);
-t_stack				*ft_create_stack(char **av, int ac);
+t_stack				*ft_create_stack(char **av, int ac, char *s);
 void				ft_print_stack(t_stack);
 
 #endif

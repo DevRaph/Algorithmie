@@ -34,9 +34,7 @@ static int			ft_isint(char *s)
 	j = -1;
 	while (s && s[i] != '\0')
 	{
-		if (!ft_isdigit(s[i]))
-			return (0);
-		if (s[i] > tab[j++] && ((ft_strlen(s) - a) == 10))
+		if ((!ft_isdigit(s[i])) || (s[i] > tab[j++] && ((ft_strlen(s) - a) == 10)))
 			return (0);
 		i++;
 	}
@@ -55,7 +53,74 @@ static int 			ft_isdbl(char *s, char **av, int a)
 			return (0);
 	}
 	return (1);
-} 
+}
+
+int					ft_issort(t_stack p, int m)
+{
+	int				i;
+
+	i = 0;
+	while (i++ < p.size - 1)
+	{
+		if (m >= 1 && p.tab[i - 1] > p.tab[i])
+			return (0);
+		if (m <= 0 && p.tab[i - 1] < p.tab[i])
+			return (0);
+	}
+	return (1);
+}
+
+int					ft_maxmin(int *tab, int size, int m)
+{
+	int				i;
+	int				val;
+
+	i = 0;
+	val = 0;
+	while (i++ < size)
+	{
+		if (m >= 1 && tab[val] < tab[i])
+			val = i;
+		if (m <= 0 && tab[val] > tab[i])
+			val = i;
+	}
+	return (val);
+}
+
+static void			ft_exec(t_stack pa, t_stack pb)
+{
+	int				i;
+
+	ft_print_stack(pa);
+	ft_print_stack(pb);
+	ft_putstr("\nl'index de la valeur max de la pile a est : ");
+	i = ft_maxmin(pa.tab, pa.size, 1);
+	ft_putnbr(i);
+	if (i < (pa.nb / 2))
+		ft_putstr(" partie basse");
+	else
+		ft_putstr(" partie haute");
+	ft_putstr("\nl'index de la valeur min de la pile a est : ");
+	i = ft_maxmin(pa.tab, pa.size, 0);	
+	ft_putnbr(i);
+	if (i < (pa.nb / 2))
+		ft_putstr(" partie basse");
+	else
+		ft_putstr(" partie haute");
+	ft_putstr("\nl'index de milieu de la pile est : ");
+	ft_putnbr(pa.nb / 2);
+	ft_putstr("\nLa pile a est ");
+	i = 1;
+	if (ft_issort(pa, i))
+		ft_putstr("triée ");
+	else
+		ft_putstr("non triée ");
+	if (i >= 1)
+		ft_putstr("dans l'ordre croissant");
+	else
+		ft_putstr("dans l'ordre decroissant");
+	ft_putstr("\n");
+}
 
 static int			ft_check(char **av, int ac)
 {
@@ -80,11 +145,10 @@ void				ft_launch(char **av, int ac)
 
 	if (ft_check(av, ac))
 	{  
-		ft_putendl("good check");
-		pa = ft_create_stack(av, ac);
-		pb = ft_create_stack(NULL, ac);
-		ft_print_stack(*pa);
-		ft_print_stack(*pb);
+		//	ft_putendl("good check");
+		pa = ft_create_stack(av, ac, "pile a");
+		pb = ft_create_stack(NULL, ac, "pile b");
+		ft_exec(*pa, *pb);
 	}
 	else
 		ft_putendl("Error");
