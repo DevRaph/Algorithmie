@@ -7,7 +7,7 @@ project of stack sort at ecole 42
 
 ##TO_DO
 
-° gestion of errors (just numbers, negative and positive, less or equal than int, argument given, not duplicate arguments).
++ gestion of errors (just numbers, negative and positive, less or equal than int, argument given, not duplicate arguments).
 * move routines : ra, rb, rra ...
 * tools (extend to my libft)
 * gestion of stack 
