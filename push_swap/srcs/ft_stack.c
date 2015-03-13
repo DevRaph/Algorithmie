@@ -29,8 +29,12 @@ t_stack			*ft_create_stack(char **av, int ac, char *s)
 		return (NULL);
 	p->name = s;
 	p->size = ac - 1;
-	if (!(p->tab = (int *)malloc(sizeof(int) * p-> size)))
+	if (!(p->tab = (int *)malloc(sizeof(int) * p->size)))
 		return (NULL);
+	//	ft_bzero(p, (sizeof(int) * p->size));
+	i = -1;
+	while (i++ < p->size)
+		p->tab[i] = -1234;
 	p->nb = 0;
 	if (av != NULL)
 	{ 

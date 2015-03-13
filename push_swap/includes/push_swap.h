@@ -27,5 +27,6 @@ t_stack				*ft_create_stack(char **av, int ac, char *s);
 void				ft_print_stack(t_stack);
 void				ft_swaps(t_stack p, char opt);
 void				ft_swapss(t_stack p1, t_stack p2, char opt);
+void				ft_push(t_stack *pa, t_stack *pb, char o);
 
 #endif
