@@ -13,6 +13,7 @@
 #include "../libft/libft.h"
 #include "../includes/push_swap.h"
 #include <stdlib.h>
+#include <unistd.h>
 
 static int			ft_isint(char *s)
 {
@@ -68,7 +69,7 @@ int					ft_issort(t_stack p, int m)
 			return (0);
 	}
 	return (1);
-}
+} 
 
 int					ft_maxmin(int *tab, int size, int m)
 {
@@ -87,7 +88,7 @@ int					ft_maxmin(int *tab, int size, int m)
 	return (val);
 }
 
-static void			ft_exec(t_stack pa, t_stack pb)
+static void			ft_test(t_stack pa, t_stack pb)
 {
 	int				i;
 
@@ -119,7 +120,7 @@ static void			ft_exec(t_stack pa, t_stack pb)
 		ft_putstr("dans l'ordre croissant");
 	else
 		ft_putstr("dans l'ordre decroissant");
-	ft_putstr("\n");
+	ft_putstr("\n\n");
 	ft_swaps(pa, '1');
 	ft_putstr("\n");
 	ft_print_stack(pa);
@@ -146,6 +147,28 @@ static void			ft_exec(t_stack pa, t_stack pb)
 	ft_print_stack(pa);
 	ft_print_stack(pb);
 	ft_putstr("\n");
+	ft_swaps(pa, '1');
+	ft_putstr("\n");
+	ft_print_stack(pa);
+	ft_print_stack(pb);
+	ft_putstr("\n");
+	ft_push(&pa, &pb, 'a');
+	ft_push(&pa, &pb, 'a');
+	ft_push(&pa, &pb, 'a');
+	ft_putstr("\n");
+	ft_print_stack(pa);
+	ft_print_stack(pb);
+	ft_putstr("\n");
+}
+
+static void			ft_exec(t_stack pa, t_stack pb)
+{
+	while (1)
+	{
+		ft_test(pa, pb);
+		if (!ft_issort(pa, 0))
+			exit (write (1, "\n\nstack is SORT\n", 16));
+	}
 }
 
 static int			ft_check(char **av, int ac)
@@ -172,8 +195,8 @@ void				ft_launch(char **av, int ac)
 	if (ft_check(av, ac))
 	{  
 		//	ft_putendl("good check");
-		pa = ft_create_stack(av, ac, "pile a");
-		pb = ft_create_stack(NULL, ac, "pile b");
+		pa = ft_create_stack(av, ac, "stack a");
+		pb = ft_create_stack(NULL, ac, "stack b");
 		ft_exec(*pa, *pb);
 	}
 	else
