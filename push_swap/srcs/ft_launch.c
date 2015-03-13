@@ -92,8 +92,8 @@ static void			ft_test(t_stack pa, t_stack pb)
 {
 	int				i;
 
-	ft_print_stack(pa);
-	ft_print_stack(pb);
+	ft_print_stack(pa, "not");
+	ft_print_stack(pb, "not");
 	ft_putstr("\nl'index de la valeur max de la pile a est : ");
 	i = ft_maxmin(pa.tab, pa.size, 1);
 	ft_putnbr(i);
@@ -123,41 +123,41 @@ static void			ft_test(t_stack pa, t_stack pb)
 	ft_putstr("\n\n");
 	ft_swaps(pa, '1');
 	ft_putstr("\n");
-	ft_print_stack(pa);
-	ft_print_stack(pb);
+	ft_print_stack(pa, "sa");
+	ft_print_stack(pb, "not");
 	ft_putstr("\n");
 	ft_push(&pa, &pb, 'b');
 	ft_push(&pa, &pb, 'b');
 	ft_push(&pa, &pb, 'b');
 	ft_putstr("\n");	
-	ft_print_stack(pa);
-	ft_print_stack(pb);
+	ft_print_stack(pa, "pb");
+	ft_print_stack(pb, "pb");
 	ft_putstr("\n");
 	//	ft_rotate(&pa, &pb, 'a', '0');
 	//	ft_rotate(&pa, &pb, 'b', '0');
 	ft_rotate(&pa, &pb, 'r', '0');
 	ft_putstr("\n");
-	ft_print_stack(pa);
-	ft_print_stack(pb);
+	ft_print_stack(pa, "rr");
+	ft_print_stack(pb, "rr");
 	ft_putstr("\n");
 	//	ft_rotate_r(&pa, &pb, 'a', '0');
 	//	ft_rotate_r(&pa, &pb, 'b', '0');	
 	ft_rotate_r(&pa, &pb, 'r', '0');	
 	ft_putstr("\n");
-	ft_print_stack(pa);
-	ft_print_stack(pb);
+	ft_print_stack(pa, "rrr");
+	ft_print_stack(pb, "rrr");
 	ft_putstr("\n");
 	ft_swaps(pa, '1');
 	ft_putstr("\n");
-	ft_print_stack(pa);
-	ft_print_stack(pb);
+	ft_print_stack(pa, "sa");
+	ft_print_stack(pb, "not");
 	ft_putstr("\n");
 	ft_push(&pa, &pb, 'a');
 	ft_push(&pa, &pb, 'a');
 	ft_push(&pa, &pb, 'a');
 	ft_putstr("\n");
-	ft_print_stack(pa);
-	ft_print_stack(pb);
+	ft_print_stack(pa, "pa");
+	ft_print_stack(pb, "pa");
 	ft_putstr("\n");
 }
 
@@ -165,9 +165,9 @@ static void			ft_exec(t_stack pa, t_stack pb)
 {
 	while (1)
 	{
-		ft_test(pa, pb);
-		if (!ft_issort(pa, 0))
+		if (ft_issort(pa, 0))
 			exit (write (1, "\n\nstack is SORT\n", 16));
+		ft_test(pa, pb);
 	}
 }
 
