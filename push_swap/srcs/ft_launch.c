@@ -119,19 +119,33 @@ static void			ft_exec(t_stack pa, t_stack pb)
 		ft_putstr("dans l'ordre croissant");
 	else
 		ft_putstr("dans l'ordre decroissant");
-	ft_putstr("\n\n");
+	ft_putstr("\n");
 	ft_swaps(pa, '1');
-	ft_putstr("\n\n");
+	ft_putstr("\n");
 	ft_print_stack(pa);
 	ft_print_stack(pb);
-	ft_putstr("\n\n");
-	ft_push_stack(&pa, &pb, 'b');
-	ft_push_stack(&pa, &pb, 'b');
-	ft_push_stack(&pa, &pb, 'b');
-	ft_putstr("\n\n");	
+	ft_putstr("\n");
+	ft_push(&pa, &pb, 'b');
+	ft_push(&pa, &pb, 'b');
+	ft_push(&pa, &pb, 'b');
+	ft_putstr("\n");	
 	ft_print_stack(pa);
 	ft_print_stack(pb);
-	ft_putstr("\n\n");
+	ft_putstr("\n");
+	//	ft_rotate(&pa, &pb, 'a', '0');
+	//	ft_rotate(&pa, &pb, 'b', '0');
+	ft_rotate(&pa, &pb, 'r', '0');
+	ft_putstr("\n");
+	ft_print_stack(pa);
+	ft_print_stack(pb);
+	ft_putstr("\n");
+	//	ft_rotate_r(&pa, &pb, 'a', '0');
+	//	ft_rotate_r(&pa, &pb, 'b', '0');	
+	ft_rotate_r(&pa, &pb, 'r', '0');	
+	ft_putstr("\n");
+	ft_print_stack(pa);
+	ft_print_stack(pb);
+	ft_putstr("\n");
 }
 
 static int			ft_check(char **av, int ac)

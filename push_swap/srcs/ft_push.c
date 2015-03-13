@@ -3,7 +3,7 @@
 #include "../includes/push_swap.h"
 
 // char c choose pile a or pile b by 'a' or 'b'
-void			ft_push_stack(t_stack *pa, t_stack *pb, char o)
+void			ft_push(t_stack *pa, t_stack *pb, char o)
 { 
 	if (o == 'a' && pb->nb != 0)
 	{
