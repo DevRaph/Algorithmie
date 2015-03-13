@@ -33,7 +33,7 @@ t_stack			*ft_create_stack(char **av, int ac, char *s)
 		return (NULL);
 	p->nb = 0;
 	if (av != NULL)
-	{
+	{ 
 		p->nb = ac - 1;
 		i = 0;
 		while (i++ < p->size)

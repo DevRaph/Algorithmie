@@ -119,7 +119,10 @@ static void			ft_exec(t_stack pa, t_stack pb)
 		ft_putstr("dans l'ordre croissant");
 	else
 		ft_putstr("dans l'ordre decroissant");
-	ft_putstr("\n");
+	ft_putstr("\n\n");
+	ft_swaps(pa, '1');
+	ft_putstr("\n\n");
+	ft_print_stack(pa);
 }
 
 static int			ft_check(char **av, int ac)

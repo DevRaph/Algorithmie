@@ -15,7 +15,8 @@ NAME = push_swap.a
 FLAG = -Wall -Wextra -Werror
 
 SRC = ft_launch.c \
-		ft_stack.c 
+		ft_stack.c \
+		ft_swap_stack.c
 
 OBJ = $(SRC:.c=.o)
 
