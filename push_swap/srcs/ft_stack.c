@@ -4,6 +4,14 @@
 #include <stdlib.h>
 
 // voir si p.nb - 1 ou regler taille
+void			ft_print(t_stack pa, t_stack pb, char *sa, char *sb)
+{
+	ft_putstr("\n");
+	ft_print_stack(pa, sa);
+	ft_print_stack(pb, sb);
+	ft_putstr("\n");
+}
+
 void			ft_print_stack(t_stack p, char *s)
 {
 	int			i;
