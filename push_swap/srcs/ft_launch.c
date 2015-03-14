@@ -208,6 +208,11 @@ static void			ft_exec(t_stack pa, t_stack pb)
 			// voir reglage de checkend
 			/*if (pa.tab[pa.nb - 2] > pa.tab[pa.nb - 1])
 			  ft_checkend(pa, pb);*/
+			if (ft_maxmin(pa.tab, pa.nb, 1) == (pa.nb - 1))
+			{
+				ft_rotate(&pa, &pb, 'a', '0');
+				ft_print(pa, pb, "ra", "not");
+			}	
 			ft_checkend(pa, pb);
 			if (ft_maxmin(pa.tab, pa.nb, 1) == (pa.nb - 1))
 			{
