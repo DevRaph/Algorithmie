@@ -6,10 +6,13 @@
 // voir si p.nb - 1 ou regler taille
 void			ft_print(t_stack pa, t_stack pb, char *sa, char *sb)
 {
-	ft_putstr("\n");
-	ft_print_stack(pa, sa);
-	ft_print_stack(pb, sb);
-	ft_putstr("\n");
+	if (sa != NULL && sb != NULL)
+	{
+		ft_putstr("\n");
+		ft_print_stack(pa, sa);
+		ft_print_stack(pb, sb);
+		ft_putstr("\n");
+	}
 }
 
 static void		ft_print_name(char *s)
@@ -48,27 +51,34 @@ void			ft_print_stack(t_stack p, char *s)
 } 
 
 t_stack			*ft_create_stack(char **av, int ac, char *s)
-{  
+{   
 	t_stack		*p;
 	int			i;
 
 	if (!(p = (t_stack *)malloc(sizeof(t_stack))))
 		return (NULL);
 	p->name = s;
-	p->size = ac - 1;
-	if (!(p->tab = (int *)malloc(sizeof(int) * p->size)))
+	if (!(p->tab = (int *)malloc(sizeof(int) * ac)))
 		return (NULL);
 	//	ft_bzero(p, (sizeof(int) * p->size));
-	i = -1;
-	while (i++ < p->size)
-		p->tab[i] = -1234;
+	/*i = -1;
+	  while (i++ < ac)
+	  p->tab[i] = -1234;*/
+	p->size = ac;
 	p->nb = 0;
 	if (av != NULL)
-	{ 
-		p->nb = ac - 1;
-		i = 0;
-		while (i++ < p->size)
-			p->tab[i - 1] = ft_atoi(av[i]);
+	{   
+		//p->nb = ac;
+		i = 1;
+		while (av && av[i])
+		{
+			if (av[i][0] == '-' && ft_isalpha(av[i][1]))
+				i++;
+			else
+				break;
+		}
+		while (av && av[i++])
+			p->tab[p->nb++] = ft_atoi(av[i - 1]);
 	} 
 	return (p);
 }

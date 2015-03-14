@@ -15,78 +15,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-static int			ft_isint(char *s)
-{
-	int		i;
-	int		j;
-	char	*tab;
-	int		a;
-
-	tab = ft_strdup("2147483647");
-	i = 0;
-	a = 0;
-	if (s && s[0] == '-' && !a++)
-	{
-		i++;
-		tab[9] = '8';	
-	}
-	if ((ft_strlen(s) - i) > 10)
-		return (0);
-	j = -1;
-	while (s && s[i] != '\0')
-	{
-		if ((!ft_isdigit(s[i])) || (s[i] > tab[j++] && ((ft_strlen(s) - a) == 10)))
-			return (0);
-		i++;
-	}
-	free (tab);
-	return (1);
-}
-
-static int 			ft_isdbl(char *s, char **av, int a)
-{
-	int				i;
-
-	i = 0;
-	while (av && av[++i])
-	{
-		if (!ft_strcmp(s, av[i]) && a != i)
-			return (0);
-	}
-	return (1);
-}
-
-int					ft_issort(t_stack p, int m)
-{
-	int				i;
-
-	i = 0;
-	while (i++ < p.size - 1)
-	{
-		if (m >= 1 && p.tab[i - 1] > p.tab[i])
-			return (0);
-		if (m <= 0 && p.tab[i - 1] < p.tab[i])
-			return (0);
-	}
-	return (1);
-} 
-
-int					ft_maxmin(int *tab, int size, int m)
-{ 
-	int				i;
-	int				val;
-
-	i = 0;
-	val = 0;
-	while (i++ < size)
-	{
-		if (m >= 1 && tab[val] < tab[i])
-			val = i;
-		if (m <= 0 && tab[val] > tab[i])
-			val = i;
-	}
-	return (val);
-}
 /* 
    static void			ft_test(t_stack pa, t_stack pb)
    { 
@@ -163,7 +91,7 @@ ft_putstr("\n");
 */
 
 void				ft_checkend(t_stack pa, t_stack pb)
-{ 
+{  
 	int				i;
 
 	i = 0;
@@ -187,108 +115,152 @@ void				ft_checkend(t_stack pa, t_stack pb)
 	}
 } 
 
-static void			ft_exec(t_stack pa, t_stack pb)
+void				ft_test2(t_stack pa, t_stack pb)
 {
-	//	char			*op;
 	int				i;
-	int				count;
 
-	count = 2;
-	while (count-- > 0)
-	{
-		if (ft_issort(pa, 0))
-			exit (write (1, "\nstack is SORT\n", 15));
-		else if (count <= 1)
-			write (1, "\nstack is NOT sort\n", 19);
-		//ft_test(pa, pb);
-		ft_print(pa, pb, "not", "not");
-		ft_checkend(pa, pb);
-		while (pa.nb > 0 && !ft_issort(pa, 0))
+	//ft_putendl("FIRST PART");
+	while (pa.nb > 0 && !ft_issort(pa, 0))
+	{ 
+		// voir reglage de checkend
+		/*if (pa.tab[pa.nb - 2] > pa.tab[pa.nb - 1])
+		  ft_checkend(pa, pb);*/
+		if (ft_maxmin(pa.tab, pa.nb, 1) == (pa.nb - 1))
 		{
-			// voir reglage de checkend
-			/*if (pa.tab[pa.nb - 2] > pa.tab[pa.nb - 1])
-			  ft_checkend(pa, pb);*/
-			if (ft_maxmin(pa.tab, pa.nb, 1) == (pa.nb - 1))
-			{
-				ft_rotate(&pa, &pb, 'a', '0');
-				ft_print(pa, pb, "ra", "not");
-			}	
-			ft_checkend(pa, pb);
-			if (ft_maxmin(pa.tab, pa.nb, 1) == (pa.nb - 1))
-			{
-				//	ft_checkend(pa, pb);	
-				ft_rotate(&pa, &pb, 'a', '0');
-				ft_print(pa, pb, "ra", "not");
-			}
-			else if (!ft_issort(pa, 0))
-			{
-				ft_push(&pa, &pb, 'b');
-				ft_print(pa, pb, "not", "pb");
-				//ft_checkend(pa, pb);
-			}
+			ft_rotate(&pa, &pb, 'a', '0');
+			ft_print(pa, pb, "ra", "not");
+		}	
+		ft_checkend(pa, pb);
+		if (ft_maxmin(pa.tab, pa.nb, 1) == (pa.nb - 1))
+		{
+			//	ft_checkend(pa, pb);	
+			ft_rotate(&pa, &pb, 'a', '0');
+			ft_print(pa, pb, "ra", "not");
+		}
+		else if (!ft_issort(pa, 0))
+		{
+			ft_push(&pa, &pb, 'b');
+			ft_print(pa, pb, "not", "pb");
 			//ft_checkend(pa, pb);
 		}
-		i = 0;
-		while (pb.nb > 0)
+		//ft_checkend(pa, pb);
+	}
+	ft_putendl("SECOND PART");
+	i = 0;
+	while (pb.nb > 0)
+	{
+		ft_checkend(pa, pb);
+		i = ft_maxmin(pb.tab, pb.nb, 1);
+		if (i < (pb.nb / 2) && pb.nb > 2)
 		{
-			ft_checkend(pa, pb);
-			i = ft_maxmin(pb.tab, pb.nb, 1);
-			if (i < (pb.nb / 2) && pb.nb > 2)
+			while (i-- >= 0)
 			{
-				while (i-- >= 0)
-				{
-					ft_rotate_r(&pa, &pb, 'b', '0');
-					ft_print(pa, pb, "not", "rrb");
-				}
+				ft_rotate_r(&pa, &pb, 'b', '0');
+				ft_print(pa, pb, "not", "rrb");
 			}
-			else
-			{  
-				while (i++ < (pb.nb - 1))
-				{
-					ft_rotate(&pa, &pb, 'b', '0');		
-					ft_print(pa, pb, "not", "rb");
-				}
-			} 
-			ft_push(&pa, &pb, 'a');
-			ft_print(pa, pb, "pa", "not");
-		}   
-		/*ft_putstr("\n");
-		  ft_print_stack(pa, "not");
-		  ft_print_stack(pb, "not");
-		  ft_putstr("\n");*/
+		}
+		else
+		{  
+			while (i++ < (pb.nb - 1))
+			{
+				ft_rotate(&pa, &pb, 'b', '0');		
+				ft_print(pa, pb, "not", "rb");
+			}
+		} 
+		ft_push(&pa, &pb, 'a');
+		ft_print(pa, pb, "pa", "not");
+	}    
+}  
+
+static void			ft_exec(t_stack pa, t_stack pb)
+{
+	int				count;
+
+	ft_print(pa, pb, "not", "not");
+	ft_checkend(pa, pb);
+	count = 0;
+	//while (!ft_issort(pa, 0))
+	while (count < 2)
+	{
+		//ft_test(pa, pb);
+		//	ft_putendl("TEST\n");
+		ft_test2(pa, pb);
+
+		count++;
+		if (ft_issort(pa, 0))
+			exit (write (1, "\nstack is SORT\n", 15));
+		else if (count > 1)
+			write (1, "\nstack is NOT sort\n", 19);
 	}
 }
 
-static int			ft_check(char **av, int ac)
+void				ft_init_opt(char *s, char c)
+{ 
+	// options : -c (color) -v (verbose) -n (number of operation) -r (reverse)
+	if (c == 'c')
+		s[0] = '1';
+	else if (c == 'v')
+		s[1] = '1';
+	else if (c == 'n')
+		s[2] = '1';
+	else if (c == 'r')
+		s[3] = '1';
+	//s[4] = '0';
+	else
+	{
+		exit(ft_error("Launch", "illegal options, use -c -v -n -r"));
+		//ft_print_help()
+	}
+	//return (s);
+}
+
+
+static int			ft_check(char **av, int ac, char *opt)
 {
 	int				i;
+	int				a;
 
 	// check if option 
+	i = -1;
+	while (++i < 5)
+		opt[i] = '0';
 	i = 0;
+	while (++i < ac && av[i][0] == '-' && ft_isalpha(av[i][1]))
+		ft_init_opt(opt, av[i][1]);
+	a = i;
+	ft_putnbr(a);
+	ft_putendl("<< a");
+	//i = 0;
 	while (av && av[++i])
-	{
+	{  
 		if (!ft_isint(av[i]))
 			return (0);
 		if (!ft_isdbl(av[i], av, i))
 			return (0);
-	}
-	(void)ac;
-	return (1);
-} 
+	}  
+	return (a + 1);
+}     
 
 void				ft_launch(char **av, int ac)
-{
+{   
 	t_stack			*pa;
 	t_stack			*pb;
+	char			*opt;
+	int				a;
 
-	if (ft_check(av, ac))
+	opt = ft_strdup("00000");
+	if ((a = ft_check(av, ac, opt)) > 0)
 	{
-		// av++ to create option;
-		//	ft_putendl("good check");
-		pa = ft_create_stack(av, ac, "stack a");
-		pb = ft_create_stack(NULL, ac, "stack b");
+		ft_putnbr(a);
+		ft_putendl("<< a");
+		ft_putendl(opt);
+		if ((ac - a + 1) < 2)
+			exit(ft_error("Launch", " 0 operations, give more parameters"));
+		pa = ft_create_stack(av, ac - a + 1, "stack a");
+		pb = ft_create_stack(NULL, ac - a + 1, "stack b");
 		ft_exec(*pa, *pb);
-	}
+	} 
 	else
 		ft_putendl("Error");
+	free(opt);
 }

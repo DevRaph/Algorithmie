@@ -19,6 +19,7 @@ SRC = ft_launch.c \
 		ft_swap_stack.c \
 		ft_push.c \
 		ft_rotate.c \
+		ft_tool.c \
 
 OBJ = $(SRC:.c=.o)
 

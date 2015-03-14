@@ -31,5 +31,9 @@ void				ft_swapss(t_stack p1, t_stack p2, char opt);
 void				ft_push(t_stack *pa, t_stack *pb, char o);
 void				ft_rotate(t_stack *pa, t_stack *pb, char o, char opt);
 void				ft_rotate_r(t_stack *pa, t_stack *pb, char o, char opt);
+int					ft_isint(char *s);
+int					ft_isdbl(char *s, char **av, int a);
+int					ft_issort(t_stack p, int m);
+int					ft_maxmin(int *tab, int size, int m);
 
 #endif
