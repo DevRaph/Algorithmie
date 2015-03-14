@@ -87,7 +87,7 @@ int					ft_maxmin(int *tab, int size, int m)
 	}
 	return (val);
 }
-/*
+/* 
    static void			ft_test(t_stack pa, t_stack pb)
    { 
    int				i;
@@ -162,6 +162,31 @@ ft_putstr("\n");
 }
 */
 
+void				ft_checkend(t_stack pa, t_stack pb)
+{ 
+	int				i;
+
+	i = 0;
+	if (pa.nb >= 2 || pb.nb >= 2)
+	{
+		if (pa.nb >= 2 && (pa.tab[pa.nb - 1] > pa.tab[pa.nb - 2]))
+		{
+			ft_swaps(pa, '1');
+			i += 1;				
+		}
+		if (pb.nb >= 2 && (pb.tab[pb.nb - 1] < pb.tab[pb.nb - 2]))
+		{
+			ft_swaps(pb, '1');
+			i += 2;				
+		}
+		//ft_putendl("checkend");
+		if (i == 3)
+			ft_print(pa, pb, "ss", "ss");
+		else if (i > 0 && i < 3)
+			ft_print(pa, pb, ((i == 1) ? "sa" : "not"), ((i == 2) ? "sb" : "not"));
+	}
+} 
+
 static void			ft_exec(t_stack pa, t_stack pb)
 {
 	//	char			*op;
@@ -173,20 +198,37 @@ static void			ft_exec(t_stack pa, t_stack pb)
 	{
 		if (ft_issort(pa, 0))
 			exit (write (1, "\nstack is SORT\n", 15));
-		else if (count != 2)
+		else if (count <= 1)
 			write (1, "\nstack is NOT sort\n", 19);
 		//ft_test(pa, pb);
 		ft_print(pa, pb, "not", "not");
-		while (pa.nb > 0)
+		ft_checkend(pa, pb);
+		while (pa.nb > 0 && !ft_issort(pa, 0))
 		{
-			ft_push(&pa, &pb, 'b');
-			ft_print(pa, pb, "not", "pb");
-		} 
+			// voir reglage de checkend
+			/*if (pa.tab[pa.nb - 2] > pa.tab[pa.nb - 1])
+			  ft_checkend(pa, pb);*/
+			ft_checkend(pa, pb);
+			if (ft_maxmin(pa.tab, pa.nb, 1) == (pa.nb - 1))
+			{
+				//	ft_checkend(pa, pb);	
+				ft_rotate(&pa, &pb, 'a', '0');
+				ft_print(pa, pb, "ra", "not");
+			}
+			else if (!ft_issort(pa, 0))
+			{
+				ft_push(&pa, &pb, 'b');
+				ft_print(pa, pb, "not", "pb");
+				//ft_checkend(pa, pb);
+			}
+			//ft_checkend(pa, pb);
+		}
 		i = 0;
 		while (pb.nb > 0)
 		{
+			ft_checkend(pa, pb);
 			i = ft_maxmin(pb.tab, pb.nb, 1);
-			if (i < (pb.size / 2))
+			if (i < (pb.nb / 2) && pb.nb > 2)
 			{
 				while (i-- >= 0)
 				{
@@ -195,7 +237,7 @@ static void			ft_exec(t_stack pa, t_stack pb)
 				}
 			}
 			else
-			{ 
+			{  
 				while (i++ < (pb.nb - 1))
 				{
 					ft_rotate(&pa, &pb, 'b', '0');		
@@ -216,6 +258,7 @@ static int			ft_check(char **av, int ac)
 {
 	int				i;
 
+	// check if option 
 	i = 0;
 	while (av && av[++i])
 	{
@@ -234,7 +277,8 @@ void				ft_launch(char **av, int ac)
 	t_stack			*pb;
 
 	if (ft_check(av, ac))
-	{  
+	{
+		// av++ to create option;
 		//	ft_putendl("good check");
 		pa = ft_create_stack(av, ac, "stack a");
 		pb = ft_create_stack(NULL, ac, "stack b");
