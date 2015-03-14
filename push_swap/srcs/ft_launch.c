@@ -228,15 +228,16 @@ static int			ft_check(char **av, int ac, char *opt)
 	while (++i < ac && av[i][0] == '-' && ft_isalpha(av[i][1]))
 		ft_init_opt(opt, av[i][1]);
 	a = i;
-	ft_putnbr(a);
-	ft_putendl("<< a");
 	//i = 0;
-	while (av && av[++i])
-	{  
+	//	i -= 1;
+	while (av && av[i])
+	{ 
+		ft_putendl(av[i]);
 		if (!ft_isint(av[i]))
 			return (0);
 		if (!ft_isdbl(av[i], av, i))
 			return (0);
+		i++;
 	}  
 	return (a + 1);
 }     
@@ -251,9 +252,6 @@ void				ft_launch(char **av, int ac)
 	opt = ft_strdup("00000");
 	if ((a = ft_check(av, ac, opt)) > 0)
 	{
-		ft_putnbr(a);
-		ft_putendl("<< a");
-		ft_putendl(opt);
 		if ((ac - a + 1) < 2)
 			exit(ft_error("Launch", " 0 operations, give more parameters"));
 		pa = ft_create_stack(av, ac - a + 1, "stack a");

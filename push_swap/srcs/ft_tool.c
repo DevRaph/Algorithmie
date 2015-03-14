@@ -5,29 +5,26 @@
 
 int					ft_isint(char *s)
 {
-	int		i;
-	int		j;
-	char	*tab;
-	int		a;
+	int				i;
+	char			*tab;
+	int				a;
 
 	tab = ft_strdup("2147483647");
-	i = 0;
-	a = 0;
-	if (s && s[0] == '-' && !a++)
-	{
-		i++;
-		tab[9] = '8';	
-	}
-	if ((ft_strlen(s) - i) > 10)
+	a = (s[0] == '-' && ft_strlen(s) <= 11) ? 1 : 0 ;
+	if ((ft_strlen(s) - a) > 10)
 		return (0);
-	j = -1;
-	while (s && s[i] != '\0')
+	if ((ft_strlen(s) - a) == 10)
+		tab[9] = (a == 1) ? '8' : '7'; 
+	i = -1 + a;
+	while (s && s[++i] != '\0')
 	{
-		if ((!ft_isdigit(s[i])) || (s[i] > tab[j++] && ((ft_strlen(s) - a) == 10)))
+		if (!ft_isdigit(s[i]))
 			return (0);
-		i++;
+		if ((ft_strlen(s) - a) == 10 && (s[i] > tab[i - a]))
+			return (0);
+		if ((ft_strlen(s) - a) == 10 && (s[i] < tab[i - a]))
+			return (1);
 	}
-	free (tab);
 	return (1);
 }
 
@@ -42,7 +39,7 @@ int					ft_isdbl(char *s, char **av, int a)
 			return (0);
 	}
 	return (1);
-}
+} 
 
 int					ft_issort(t_stack p, int m)
 { 
