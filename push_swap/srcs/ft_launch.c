@@ -91,18 +91,17 @@ ft_putstr("\n");
 */
 
 void				ft_checkend(t_stack pa, t_stack pb, int *nb)
-{   
+{    
 	int				i;
 
 	i = 0;
 	if (pa.nb >= 2 || pb.nb >= 2)
-	{
+	{ 
 		if (pa.nb >= 2 && (pa.tab[pa.nb - 1] > pa.tab[pa.nb - 2]))
 			i += 1;				
 		if (pb.nb >= 2 && (pb.tab[pb.nb - 1] < pb.tab[pb.nb - 2]))
 			i += 2;				
 	}
-	//	ft_putnbr(i);
 	if (i == 3)
 		*nb += ft_swapss(pa, pb, '1');
 	else if (i == 2)
@@ -119,7 +118,6 @@ void				ft_test2(t_stack pa, t_stack pb, int *nb)
 {
 	int				i;
 
-	//ft_putendl("FIRST PART");
 	while (pa.nb > 0 && !ft_issort(pa, 0))
 	{ 
 		// voir reglage de checkend
@@ -180,7 +178,22 @@ static void			ft_exec(t_stack pa, t_stack pb)
 
 	nb = 0;
 	ft_print(pa, pb, "not", "not");
-	ft_checkend(pa, pb, &nb);
+	if (pa.nb >= 2 && pa.tab[0] < pa.tab[1] && pa.nb != 3)
+	{
+
+		nb += ft_rotate_r(&pa, &pb, 'a');
+		ft_print(pa, pb, "rra", "not");
+		nb += ft_rotate_r(&pa, &pb, 'a');
+		ft_print(pa, pb, "rra", "not");
+		nb += ft_swaps(pa, '1');
+		ft_print(pa, pb, "sa", "not");
+		nb += ft_rotate(&pa, &pb, 'a');
+		ft_print(pa, pb, "ra", "not");
+		nb += ft_rotate(&pa, &pb, 'a');
+		ft_print(pa, pb, "ra", "not");
+	}
+	if (!ft_issort(pa, 0) && pa.nb != 3)
+		ft_checkend(pa, pb, &nb);
 	count = 0;
 	//while (!ft_issort(pa, 0))
 	while (count < 2)
@@ -188,8 +201,13 @@ static void			ft_exec(t_stack pa, t_stack pb)
 		ft_test2(pa, pb, &nb);
 		count++;
 		if (ft_issort(pa, 0))
-		{ 
-			write (1, "\nstack is SORT", 15);
+		{
+			write (1, "\nstack is SORT\n", 15);
+			if (pa.opt[END] == '1' && pa.opt[VB] == '0')
+			{
+				pa.opt[VB] = '1';
+				ft_print(pa, pb, "not", "not");
+			}
 			if (pa.opt[NB] == '1')
 			{
 				ft_putstr(" in ");
@@ -205,7 +223,7 @@ static void			ft_exec(t_stack pa, t_stack pb)
 
 void				ft_init_opt(char *s, char c)
 { 
-	// options : -c (color) -v (verbose) -n (number of operation) -r (reverse)
+	// options : -c (color) -v (verbose) -n (number of operation) -r (reverse) -e (end)
 	if (c == 'c')
 		s[0] = '1';
 	else if (c == 'v')
@@ -214,10 +232,11 @@ void				ft_init_opt(char *s, char c)
 		s[2] = '1';
 	else if (c == 'r')
 		s[3] = '1';
-	//s[4] = '0';
+	else if (c == 'e')
+		s[4] = '1';
 	else
-	{
-		exit(ft_error("Launch", "illegal options, use -c -v -n -r"));
+	{ 
+		exit(ft_error("Launch", "illegal options, use -c -v -n -r -e"));
 		//ft_print_help()
 	}
 }

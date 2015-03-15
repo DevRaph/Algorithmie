@@ -16,7 +16,7 @@
 # define VB 1
 # define NB 2
 # define REV 3
-# define YYY 4
+# define END 4
 
 typedef struct		s_stack
 {
