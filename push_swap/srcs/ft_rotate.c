@@ -10,7 +10,7 @@ static void			ft_swap_rot(t_stack *p, int i, int a)
 }
 
 // char opt for color option
-void				ft_rotate(t_stack *pa, t_stack *pb, char o, char opt)
+int					ft_rotate(t_stack *pa, t_stack *pb, char o)
 {
 	int				i;
 
@@ -29,11 +29,10 @@ void				ft_rotate(t_stack *pa, t_stack *pb, char o, char opt)
 		if (o != 'r')
 			ft_putstr("rb ");
 	}
-	if (opt == '1')
-		ft_putstr(" colors actived ");
+	return (1);
 }
 
-void				ft_rotate_r(t_stack *pa, t_stack *pb, char o, char opt)
+int					ft_rotate_r(t_stack *pa, t_stack *pb, char o)
 { 
 	int				i;
 
@@ -52,6 +51,5 @@ void				ft_rotate_r(t_stack *pa, t_stack *pb, char o, char opt)
 		if (o != 'r')
 			ft_putstr("rrb ");
 	} 
-	if (opt == '1')
-		ft_putstr(" colors actived ");
+	return (1);
 }
