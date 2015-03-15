@@ -72,10 +72,11 @@ t_stack			*ft_create_stack(char **av, int ac, char *s, char *opt)
 	if (av != NULL)
 	{    
 		i = 1;
-		while (av && av[i] && av[i][0] == '-' && ft_isalpha(av[i][1]))
+		//while (av && av[i] && av[i][0] == '-' && ft_isalpha(av[i][1]))
+		while (av && av[i])
 			i++;
-		while (av && av[i++])
-			p->tab[p->nb++] = ft_atoi(av[i - 1]);
+		while (ac--)
+			p->tab[p->nb++] = ft_atoi(av[--i]);
 	} 
 	return (p);
 }
