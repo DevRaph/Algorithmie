@@ -114,10 +114,9 @@ void				ft_checkend(t_stack pa, t_stack pb, int *nb)
 		ft_print(pa, pb, (i == 1) ? "sa" : "not", (i == 1) ? "not" : "sb" );  
 }
 
-void				ft_test2(t_stack pa, t_stack pb, int *nb)
+static void			ft_first_part(t_stack pa, t_stack pb, int *nb)
 {
-	int				i;
-
+	//while (pa.nb > 0 && !ft_issort(pa, 0))
 	while (pa.nb > 0 && !ft_issort(pa, 0))
 	{ 
 		// voir reglage de checkend
@@ -130,7 +129,7 @@ void				ft_test2(t_stack pa, t_stack pb, int *nb)
 		}	
 		ft_checkend(pa, pb, nb);
 		if (ft_maxmin(pa.tab, pa.nb, 1) == (pa.nb - 1))
-		{ 
+		{
 			//	ft_checkend(pa, pb, nb);	
 			*nb += ft_rotate(&pa, &pb, 'a');
 			ft_print(pa, pb, "ra", "not");
@@ -143,6 +142,13 @@ void				ft_test2(t_stack pa, t_stack pb, int *nb)
 		}
 		//ft_checkend(pa, pb, nb);
 	}
+}
+
+void				ft_test2(t_stack pa, t_stack pb, int *nb)
+{
+	int				i;
+
+	ft_first_part(pa, pb, nb);
 	//ft_putendl("SECOND PART");
 	i = 0;
 	while (pb.nb > 0)
@@ -171,6 +177,31 @@ void				ft_test2(t_stack pa, t_stack pb, int *nb)
 	//return (nb);
 }  
 
+/* algo.c beyond */
+
+static void			ft_checktail(t_stack pa, t_stack pb, int *nb)
+{
+	int				i;
+
+	if (pa.opt[REV] == '0')
+		i = pa.tab[0] < pa.tab[1];
+	else
+		i = pa.tab[0] > pa.tab[1];
+	if (pa.nb >= 2 && i && pa.nb != 3 && pa.nb != 5)
+	{ 
+		*nb += ft_rotate_r(&pa, &pb, 'a');
+		ft_print(pa, pb, "rra", "not");
+		*nb += ft_rotate_r(&pa, &pb, 'a');
+		ft_print(pa, pb, "rra", "not");
+		*nb += ft_swaps(pa, '1');
+		ft_print(pa, pb, "sa", "not");
+		*nb += ft_rotate(&pa, &pb, 'a');
+		ft_print(pa, pb, "ra", "not");
+		*nb += ft_rotate(&pa, &pb, 'a');
+		ft_print(pa, pb, "ra", "not");
+	}
+}
+
 static void			ft_exec(t_stack pa, t_stack pb)
 { 
 	int				count;
@@ -178,25 +209,12 @@ static void			ft_exec(t_stack pa, t_stack pb)
 
 	nb = 0;
 	ft_print(pa, pb, "not", "not");
-	if (pa.nb >= 2 && pa.tab[0] < pa.tab[1] && pa.nb != 3 && pa.nb != 5)
-	{
-
-		nb += ft_rotate_r(&pa, &pb, 'a');
-		ft_print(pa, pb, "rra", "not");
-		nb += ft_rotate_r(&pa, &pb, 'a');
-		ft_print(pa, pb, "rra", "not");
-		nb += ft_swaps(pa, '1');
-		ft_print(pa, pb, "sa", "not");
-		nb += ft_rotate(&pa, &pb, 'a');
-		ft_print(pa, pb, "ra", "not");
-		nb += ft_rotate(&pa, &pb, 'a');
-		ft_print(pa, pb, "ra", "not");
-	}
+	ft_checktail(pa, pb, &nb);
 	if (!ft_issort(pa, 0) && pa.nb != 3)
 		ft_checkend(pa, pb, &nb);
 	count = 0;
-	//while (!ft_issort(pa, 0))
-	while (count < 2)
+	//while (count < 2)
+	while (1)
 	{
 		ft_test2(pa, pb, &nb);
 		count++;
@@ -210,16 +228,15 @@ static void			ft_exec(t_stack pa, t_stack pb)
 			}
 			if (pa.opt[NB] == '1')
 			{
-				ft_putstr(" in ");
 				ft_putnbr(nb);
-				ft_putstr(" operations");
+				ft_putstr(" operations used");
 			}
 			exit (write(1, "\n", 1));
 		}
 		else if (count > 1)
 			write (1, "\nstack is NOT sort\n", 19);
 	}
-}
+} 
 
 void				ft_init_opt(char *s, char c)
 { 
