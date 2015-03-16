@@ -178,7 +178,7 @@ static void			ft_exec(t_stack pa, t_stack pb)
 
 	nb = 0;
 	ft_print(pa, pb, "not", "not");
-	if (pa.nb >= 2 && pa.tab[0] < pa.tab[1] && pa.nb != 3)
+	if (pa.nb >= 2 && pa.tab[0] < pa.tab[1] && pa.nb != 3 && pa.nb != 5)
 	{
 
 		nb += ft_rotate_r(&pa, &pb, 'a');

@@ -40,5 +40,6 @@ int					ft_isint(char *s);
 int					ft_isdbl(char *s, char **av, int a);
 int					ft_issort(t_stack p, int m);
 int					ft_maxmin(int *tab, int size, int m);
+int					ft_issplit(t_stack pa, t_stack pb, int m);
 
 #endif

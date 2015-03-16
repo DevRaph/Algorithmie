@@ -64,11 +64,36 @@ int					ft_maxmin(int *tab, int size, int m)
 	i = 0;
 	val = 0;
 	while (i++ < size)
-	{
+	{ 
 		if (m >= 1 && tab[val] < tab[i])
 			val = i;
 		if (m <= 0 && tab[val] > tab[i])
 			val = i;
 	}
 	return (val);
-} 
+}
+
+int					ft_issplit(t_stack pa, t_stack pb, int m)
+{
+	int				a;
+	int				b;
+
+	if (m == 1)
+	{
+		a = ft_maxmin(pa.tab, pa.nb, 0);
+		b = ft_maxmin(pb.tab, pb.nb, 1);
+		if (pa.tab[a] > pb.tab[b])
+			return (1);
+		else
+			return (0);
+	}
+	else
+	{
+		a = ft_maxmin(pa.tab, pa.nb, 1);
+		b = ft_maxmin(pb.tab, pb.nb, 0);
+		if (pa.tab[a] < pb.tab[b])
+			return (1);
+		else
+			return (0);
+	}
+}
