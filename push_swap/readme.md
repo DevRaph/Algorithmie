@@ -14,3 +14,6 @@ this kind of errors are catch :
 - error of option (not possible option)
 - specifics cases (just 1 arguments, arguments already sort)
 
+##NOTES
+- on function push char c choose stack a or stack b by 'a' or 'b'
+- char opt for color option

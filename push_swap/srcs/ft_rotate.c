@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_rotate.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rpinet <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/03/17 18:57:34 by rpinet            #+#    #+#             */
+/*   Updated: 2015/03/17 18:57:40 by rpinet           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "../includes/push_swap.h" 
-#include "../libft/libft.h" 
+#include "../includes/push_swap.h"
+#include "../libft/libft.h"
 
 static void			ft_swap_rot(t_stack *p, int i, int a)
 {
@@ -9,7 +20,6 @@ static void			ft_swap_rot(t_stack *p, int i, int a)
 	*(p->tab + i) = *(p->tab + i) ^ *(p->tab + a);
 }
 
-// char opt for color option
 int					ft_rotate(t_stack *pa, t_stack *pb, char o)
 {
 	int				i;
@@ -22,7 +32,7 @@ int					ft_rotate(t_stack *pa, t_stack *pb, char o)
 		ft_putstr((o == 'r') ? "rr" : "ra");
 	}
 	if (o == 'b' || o == 'r')
-	{ 
+	{
 		i = pb->nb - 1;
 		while (i-- > 0)
 			ft_swap_rot(pb, i, i + 1);
@@ -34,7 +44,7 @@ int					ft_rotate(t_stack *pa, t_stack *pb, char o)
 }
 
 int					ft_rotate_r(t_stack *pa, t_stack *pb, char o)
-{ 
+{
 	int				i;
 
 	if (o == 'a' || o == 'r')

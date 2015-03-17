@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_tool.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rpinet <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/03/17 18:58:20 by rpinet            #+#    #+#             */
+/*   Updated: 2015/03/17 18:58:26 by rpinet           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "../libft/libft.h" 
-#include "../includes/push_swap.h" 
+#include "../libft/libft.h"
+#include "../includes/push_swap.h"
 #include <stdlib.h>
 
 int					ft_isint(char *s)
@@ -10,11 +21,11 @@ int					ft_isint(char *s)
 	int				a;
 
 	tab = ft_strdup("2147483647");
-	a = ((s[0] == '-' || s[0] == '+') && ft_strlen(s) <= 11) ? 1 : 0 ;
+	a = ((s[0] == '-' || s[0] == '+') && ft_strlen(s) <= 11) ? 1 : 0;
 	if (((ft_strlen(s) - a) > 10) || (ft_strlen(s) <= 1 && s[0] == '-'))
 		return (0);
 	if ((ft_strlen(s) - a) == 10 && s[0] == '-')
-		tab[9] = (a == 1) ? '8' : '7'; 
+		tab[9] = (a == 1) ? '8' : '7';
 	i = -1 + a;
 	while (s && s[++i] != '\0')
 	{
@@ -29,7 +40,7 @@ int					ft_isint(char *s)
 }
 
 int					ft_isdbl(int s, char **av, int a)
-{ 
+{
 	int				i;
 
 	i = 1;
@@ -41,10 +52,10 @@ int					ft_isdbl(int s, char **av, int a)
 			return (0);
 	}
 	return (1);
-} 
+}
 
 int					ft_issort(t_stack p, int m)
-{ 
+{
 	int				i;
 
 	i = 0;
@@ -56,17 +67,17 @@ int					ft_issort(t_stack p, int m)
 			return (0);
 	}
 	return (1);
-} 
+}
 
 int					ft_maxmin(int *tab, int size, int m)
-{ 
+{
 	int				i;
 	int				val;
 
 	i = 0;
 	val = 0;
 	while (i++ < size)
-	{ 
+	{
 		if (m >= 1 && tab[val] < tab[i])
 			val = i;
 		if (m <= 0 && tab[val] > tab[i])

@@ -6,7 +6,7 @@
 #    By: rpinet <rpinet@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/19 20:16:12 by rpinet            #+#    #+#              #
-#    Updated: 2015/03/11 17:02:16 by rpinet           ###   ########.fr        #
+#    Updated: 2015/03/17 19:07:18 by rpinet           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRC = ft_launch.c \
 		ft_push.c \
 		ft_rotate.c \
 		ft_tool.c \
+		ft_algo.c \
 
 OBJ = $(SRC:.c=.o)
 

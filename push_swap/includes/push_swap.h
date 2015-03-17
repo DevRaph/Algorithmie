@@ -6,7 +6,7 @@
 /*   By: rpinet <rpinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/11 15:04:59 by rpinet            #+#    #+#             */
-/*   Updated: 2015/03/17 18:38:00 by rpinet           ###   ########.fr       */
+/*   Updated: 2015/03/17 19:06:49 by rpinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,8 @@ int					ft_isdbl(int s, char **av, int a);
 int					ft_issort(t_stack p, int m);
 int					ft_maxmin(int *tab, int size, int m);
 int					ft_issplit(t_stack pa, t_stack pb, int m);
+void				ft_checktail(t_stack pa, t_stack pb, int *nb);
+void				ft_checkend(t_stack pa, t_stack pb, int *nb);
+void				ft_test(t_stack pa, t_stack pb, int *nb);
 
 #endif

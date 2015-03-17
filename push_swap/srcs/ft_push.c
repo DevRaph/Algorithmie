@@ -13,7 +13,6 @@
 #include "../libft/libft.h"
 #include "../includes/push_swap.h"
 
-// char c choose stack a or stack b by 'a' or 'b'
 int				ft_push(t_stack *pa, t_stack *pb, char o)
 {
 	if (o == 'a' && pb->nb != 0)
