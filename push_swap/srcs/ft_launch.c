@@ -6,7 +6,7 @@
 /*   By: rpinet <rpinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/11 15:17:14 by rpinet            #+#    #+#             */
-/*   Updated: 2015/03/17 19:36:45 by rpinet           ###   ########.fr       */
+/*   Updated: 2015/03/17 21:42:29 by rpinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static void			ft_exec(t_stack pa, t_stack pb)
 
 	nb = 0;
 	if (ft_issort(pa, 0))
-		exit (write(1, "0 operation, stack already sort\n", 32));
+		exit (write(1, "\n", 1));
+		//exit (write(1, "0 operation, stack already sort\n", 32));
 	ft_print(pa, pb, "not", "not");
 	ft_checktail(pa, pb, &nb);
 	if (!ft_issort(pa, 0) && pa.nb != 3)
@@ -96,7 +97,8 @@ void				ft_launch(char **av, int ac)
 	if ((a = ft_check(av, ac, opt)) > 0)
 	{
 		if ((ac - a + 1) < 2)
-			exit(ft_error("Launch", " 0 operations, give more parameters"));
+			exit (write(1, "\n", 1));
+			//exit(ft_error("Launch", " 0 operations, give more parameters"));
 		pa = ft_create_stack(av, ac - a + 1, "stack a", opt);
 		pb = ft_create_stack(NULL, ac - a + 1, "stack b", opt);
 		ft_exec(*pa, *pb);
