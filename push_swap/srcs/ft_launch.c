@@ -6,7 +6,7 @@
 /*   By: rpinet <rpinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/11 15:17:14 by rpinet            #+#    #+#             */
-/*   Updated: 2015/03/17 19:13:12 by rpinet           ###   ########.fr       */
+/*   Updated: 2015/03/17 19:36:45 by rpinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-
-
 static void			ft_exec(t_stack pa, t_stack pb)
-{ 
-	int				count;
+{
 	int				nb;
 
 	nb = 0;
@@ -29,32 +26,26 @@ static void			ft_exec(t_stack pa, t_stack pb)
 	ft_checktail(pa, pb, &nb);
 	if (!ft_issort(pa, 0) && pa.nb != 3)
 		ft_checkend(pa, pb, &nb);
-	
-	count = 0;
 	while (!ft_issort(pa, 0))
-	{
 		ft_test(pa, pb, &nb);
-		count++;
-	}
 	if (ft_issort(pa, 0))
+	{
+		if (pa.opt[END] == '1' && pa.opt[VB] == '0')
 		{
-			if (pa.opt[END] == '1' && pa.opt[VB] == '0')
-			{
-				pa.opt[VB] = '1';
-				ft_print(pa, pb, "not", "not");
-			}
-			if (pa.opt[NB] == '1')
-			{
-				ft_putnbr(nb);
-				ft_putstr(" operations\n");
-			}
-			exit (0);
+			pa.opt[VB] = '1';
+			ft_print(pa, pb, "not", "not");
 		}
-} 
+		if (pa.opt[NB] == '1')
+		{
+			ft_putnbr(nb);
+			ft_putstr(" operations\n");
+		}
+		exit (0);
+	}
+}
 
 void				ft_init_opt(char *s, char c)
-{ 
-	// options : -c (color) -v (verbose) -n (number of operation) -r (reverse) -e (end)
+{
 	if (c == 'c')
 		s[0] = '1';
 	else if (c == 'v')
@@ -66,11 +57,10 @@ void				ft_init_opt(char *s, char c)
 	else if (c == 'e')
 		s[4] = '1';
 	else
-	{ 
+	{
 		exit(ft_error("Launch", "illegal options, use -c -v -n -r -e"));
 	}
 }
-
 
 static int			ft_check(char **av, int ac, char *opt)
 {
@@ -96,7 +86,7 @@ static int			ft_check(char **av, int ac, char *opt)
 }
 
 void				ft_launch(char **av, int ac)
-{     
+{
 	t_stack			*pa;
 	t_stack			*pb;
 	char			*opt;
@@ -110,7 +100,7 @@ void				ft_launch(char **av, int ac)
 		pa = ft_create_stack(av, ac - a + 1, "stack a", opt);
 		pb = ft_create_stack(NULL, ac - a + 1, "stack b", opt);
 		ft_exec(*pa, *pb);
-	}   
+	}
 	else
 		ft_putendl("Error");
 	free(opt);
