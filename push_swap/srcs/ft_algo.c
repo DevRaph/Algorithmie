@@ -6,7 +6,7 @@
 /*   By: rpinet <rpinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/17 19:03:19 by rpinet            #+#    #+#             */
-/*   Updated: 2015/03/17 19:31:49 by rpinet           ###   ########.fr       */
+/*   Updated: 2015/03/17 19:48:55 by rpinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,9 @@ static void			ft_first_part(t_stack *pa, t_stack *pb, int *nb)
 {
 	while (pa->nb > 0 && !ft_issort(*pa, 0))
 	{
-		/*if (pa.tab[pa.nb - 2] > pa.tab[pa.nb - 1])
-		  ft_checkend(pa, pb, nb);*/
+		// a voir
+		if (pa->tab[pa->nb - 2] > pa->tab[pa->nb - 1])
+			ft_checkend(*pa, *pb, nb);
 		if (ft_maxmin(pa->tab, pa->nb, 1) == (pa->nb - 1))
 		{
 			*nb += ft_rotate(pa, pb, 'a');
@@ -78,7 +79,6 @@ static void			ft_first_part(t_stack *pa, t_stack *pb, int *nb)
 		ft_checkend(*pa, *pb, nb);
 		if (ft_maxmin(pa->tab, pa->nb, 1) == (pa->nb - 1))
 		{
-			//	ft_checkend(pa, pb, nb);
 			*nb += ft_rotate(pa, pb, 'a');
 			ft_print(*pa, *pb, "ra", "not");
 		}
@@ -86,9 +86,7 @@ static void			ft_first_part(t_stack *pa, t_stack *pb, int *nb)
 		{
 			*nb += ft_push(pa, pb, 'b');
 			ft_print(*pa, *pb, "not", "pb");
-			//ft_checkend(pa, pb, nb);
 		}
-		//ft_checkend(pa, pb, nb);
 	}
 }
 
@@ -109,11 +107,13 @@ void				ft_test(t_stack pa, t_stack pb, int *nb)
 				ft_print(pa, pb, "not", "rrb");
 			}
 		else
+		{
 			while (i++ < (pb.nb - 1))
 			{
 				*nb += ft_rotate(&pa, &pb, 'b');
 				ft_print(pa, pb, "not", "rb");
 			}
+		}
 		*nb += ft_push(&pa, &pb, 'a');
 		ft_print(pa, pb, "pa", "not");
 	}

@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ft_shellcolors.c                                :+:      :+:    :+:   */
+/*   ft_shellcolors.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinet <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: rpinet <rpinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/20 14:32:33 by rpinet            #+#    #+#             */
-/*   Updated: 2015/02/20 14:32:56 by rpinet           ###   ########.fr       */
+/*   Updated: 2015/03/17 19:51:41 by rpinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
-#include "../includes/ft_minishell1.h"
 
 #define FG_COLOR_TYPE "38;5"
 #define BG_COLOR_TYPE "48;5"
