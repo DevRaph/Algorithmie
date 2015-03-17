@@ -1,10 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_push.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rpinet <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/03/17 18:39:04 by rpinet            #+#    #+#             */
+/*   Updated: 2015/03/17 18:40:07 by rpinet           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../libft/libft.h"
 #include "../includes/push_swap.h"
 
-// char c choose pile a or pile b by 'a' or 'b'
+// char c choose stack a or stack b by 'a' or 'b'
 int				ft_push(t_stack *pa, t_stack *pb, char o)
-{ 
+{
 	if (o == 'a' && pb->nb != 0)
 	{
 		pa->tab[pa->nb] = pb->tab[pb->nb - 1];
@@ -21,11 +32,5 @@ int				ft_push(t_stack *pa, t_stack *pb, char o)
 	}
 	ft_putstr((o == 'a') ? "pa" : "pb");
 	ft_putchar(10 + (!ft_issort(*pa, 0) || pb->nb) * 22);
-/*
-	ft_putstr((o == 'a') ? "pa" : "pb");
-	ft_putchar((o == 'a'))
-	//if (pb->nb != 0 && !ft_issort(*pa, 0))
-	//	ft_putstr(" ");
-	*/
 	return (1);
 }
