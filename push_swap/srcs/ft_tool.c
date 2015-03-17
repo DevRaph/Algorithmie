@@ -10,10 +10,10 @@ int					ft_isint(char *s)
 	int				a;
 
 	tab = ft_strdup("2147483647");
-	a = (s[0] == '-' && ft_strlen(s) <= 11) ? 1 : 0 ;
-	if ((ft_strlen(s) - a) > 10)
+	a = ((s[0] == '-' || s[0] == '+') && ft_strlen(s) <= 11) ? 1 : 0 ;
+	if (((ft_strlen(s) - a) > 10) || (ft_strlen(s) <= 1 && s[0] == '-'))
 		return (0);
-	if ((ft_strlen(s) - a) == 10)
+	if ((ft_strlen(s) - a) == 10 && s[0] == '-')
 		tab[9] = (a == 1) ? '8' : '7'; 
 	i = -1 + a;
 	while (s && s[++i] != '\0')
@@ -28,14 +28,16 @@ int					ft_isint(char *s)
 	return (1);
 }
 
-int					ft_isdbl(char *s, char **av, int a)
+int					ft_isdbl(int s, char **av, int a)
 { 
 	int				i;
 
-	i = 0;
+	i = 1;
+	while (av && av[i] && ((av[i][0] == '-') && ft_isalpha(av[i][1])))
+		i++;
 	while (av && av[++i])
 	{
-		if (!ft_strcmp(s, av[i]) && a != i)
+		if (s == ft_atoi(av[i]) && a != i)
 			return (0);
 	}
 	return (1);

@@ -19,6 +19,13 @@ int				ft_push(t_stack *pa, t_stack *pb, char o)
 		pb->nb++;
 		pa->nb--;
 	}
-	ft_putstr((o == 'a') ? "pa " : "pb ");
+	ft_putstr((o == 'a') ? "pa" : "pb");
+	ft_putchar(10 + (!ft_issort(*pa, 0) || pb->nb) * 22);
+/*
+	ft_putstr((o == 'a') ? "pa" : "pb");
+	ft_putchar((o == 'a'))
+	//if (pb->nb != 0 && !ft_issort(*pa, 0))
+	//	ft_putstr(" ");
+	*/
 	return (1);
 }

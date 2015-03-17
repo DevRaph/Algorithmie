@@ -19,7 +19,7 @@ int					ft_rotate(t_stack *pa, t_stack *pb, char o)
 		i = pa->nb - 1;
 		while (i-- > 0)
 			ft_swap_rot(pa, i, i + 1);
-		ft_putstr((o == 'r') ? "rr " : "ra ");
+		ft_putstr((o == 'r') ? "rr" : "ra");
 	}
 	if (o == 'b' || o == 'r')
 	{ 
@@ -27,8 +27,9 @@ int					ft_rotate(t_stack *pa, t_stack *pb, char o)
 		while (i-- > 0)
 			ft_swap_rot(pb, i, i + 1);
 		if (o != 'r')
-			ft_putstr("rb ");
+			ft_putstr("rb");
 	}
+	ft_putchar(10 + (!ft_issort(*pa, 0) || pb->nb) * 22);
 	return (1);
 }
 
@@ -41,7 +42,7 @@ int					ft_rotate_r(t_stack *pa, t_stack *pb, char o)
 		i = 0;
 		while (i++ < (pa->nb - 1))
 			ft_swap_rot(pa, i, i - 1);
-		ft_putstr((o == 'r') ? "rrr " : "rra ");
+		ft_putstr((o == 'r') ? "rrr" : "rra");
 	}
 	if (o == 'b' || o == 'r')
 	{
@@ -49,7 +50,8 @@ int					ft_rotate_r(t_stack *pa, t_stack *pb, char o)
 		while (i++ < (pb->nb - 1))
 			ft_swap_rot(pb, i, i - 1);
 		if (o != 'r')
-			ft_putstr("rrb ");
-	} 
+			ft_putstr("rrb");
+	}
+	ft_putchar(10 + (!ft_issort(*pa, 0) || pb->nb) * 22);
 	return (1);
 }

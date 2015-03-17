@@ -6,7 +6,7 @@
 /*   By: rpinet <rpinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/11 15:04:59 by rpinet            #+#    #+#             */
-/*   Updated: 2015/03/11 16:55:35 by rpinet           ###   ########.fr       */
+/*   Updated: 2015/03/17 15:12:08 by rpinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int					ft_push(t_stack *pa, t_stack *pb, char o);
 int					ft_rotate(t_stack *pa, t_stack *pb, char o);
 int					ft_rotate_r(t_stack *pa, t_stack *pb, char o);
 int					ft_isint(char *s);
-int					ft_isdbl(char *s, char **av, int a);
+int					ft_isdbl(int s, char **av, int a);
 int					ft_issort(t_stack p, int m);
 int					ft_maxmin(int *tab, int size, int m);
 int					ft_issplit(t_stack pa, t_stack pb, int m);
