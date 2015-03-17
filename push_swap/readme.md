@@ -8,6 +8,7 @@ project of stack sort at ecole 42
 	$> ./push_swap [options : -v -c -n -e] [arguments : int positives or negatives]
 
 ##HELP OPTIONS
+for good use, options must be activated one by one (-option1, -option2 ...) and before arg.
 	"-v" verbose, print stacks for each move (define VB).
 	"-c" colors Each type of move have one color (define COL).
 	"-e" end, print the stack just at end, if -v activate do nothing (define END).
