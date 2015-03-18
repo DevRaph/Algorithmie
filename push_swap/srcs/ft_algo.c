@@ -6,7 +6,7 @@
 /*   By: rpinet <rpinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/17 19:03:19 by rpinet            #+#    #+#             */
-/*   Updated: 2015/03/17 21:47:11 by rpinet           ###   ########.fr       */
+/*   Updated: 2015/03/18 11:27:36 by rpinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,7 @@ void				ft_checktail(t_stack pa, t_stack pb, int *nb)
 {
 	int				i;
 
-	if (pa.opt[REV] == '0')
-		i = pa.tab[0] < pa.tab[1];
-	else
-		i = pa.tab[0] > pa.tab[1];
+	i = (pa.opt[REV] == '0') ? pa.tab[0] < pa.tab[1] : pa.tab[0] > pa.tab[1];
 	if (pa.nb > 2 && i && pa.nb != 3 && pa.size > 5)
 	{
 		*nb += ft_rotate_r(&pa, &pb, 'a');
