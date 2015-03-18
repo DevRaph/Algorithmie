@@ -12,6 +12,7 @@
 
 #include "libft.h"
 #include <stdlib.h>
+#include <string.h>
 
 void		ft_lstdelone(t_list **alst, void (*del)(void *, size_t))
 {
