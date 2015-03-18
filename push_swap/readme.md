@@ -14,11 +14,12 @@ for good use, options must be activated one by one (-option1, -option2 ...) and 
 	"-c" colors Each type of move have one color (define COL).
 	"-e" end, print the stack just at end, if -v activate do nothing (define END).
 	"-n" number, print number of operation (define NB).
+	"-r" reverse, in dev ... (define REV).
 
 ##ERRORS
 
 this kind of errors are catch :
-- error of argument (not number, more than int, no arguments)
+- error of argument (not number, more than int, no arguments, - or + number, overflow)
 - error of option (not possible option)
 - specifics cases (just 1 arguments, arguments already sort)
 
