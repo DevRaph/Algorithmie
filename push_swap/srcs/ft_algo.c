@@ -6,7 +6,7 @@
 /*   By: rpinet <rpinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/17 19:03:19 by rpinet            #+#    #+#             */
-/*   Updated: 2015/03/18 11:27:36 by rpinet           ###   ########.fr       */
+/*   Updated: 2015/03/18 13:16:46 by rpinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,17 @@ void				ft_checkend(t_stack pa, t_stack pb, int *nb)
 
 static void			ft_first_part(t_stack *pa, t_stack *pb, int *nb)
 {
+	int				i;
+
+	//i = pa->tab[ft_maxmin(pa->tab, pa->size, 0)];// > pb->tab[ft_maxmin(pb->tab, pb->size, 1)];
 	while (pa->nb > 0 && !ft_issort(*pa, 0))
 	{
+	i = (pa->nb == 0) ? pb->tab[ft_maxmin(pb->tab, pb->nb, 1)] : pa->tab[ft_maxmin(pa->tab, pa->nb, 0)];
+		ft_putnbr(i);
+		ft_putendl("<< min a");
+	i = (pb->nb == 0) ? pa->tab[ft_maxmin(pa->tab, pa->nb, 0)] : pb->tab[ft_maxmin(pb->tab, pb->nb, 1)];
+		ft_putnbr(i);
+		ft_putendl("<< max b");
 		// a voir
 		if (pa->tab[pa->nb - 2] > pa->tab[pa->nb - 1])
 			ft_checkend(*pa, *pb, nb);

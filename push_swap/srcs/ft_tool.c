@@ -6,7 +6,7 @@
 /*   By: rpinet <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/17 18:58:20 by rpinet            #+#    #+#             */
-/*   Updated: 2015/03/18 11:36:40 by rpinet           ###   ########.fr       */
+/*   Updated: 2015/03/18 13:11:58 by rpinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,13 @@ int					ft_maxmin(int *tab, int size, int m)
 
 	i = 0;
 	val = 0;
-	while (i++ < size)
+	while (i < size)
 	{
 		if (m >= 1 && tab[val] < tab[i])
 			val = i;
 		if (m <= 0 && tab[val] > tab[i])
 			val = i;
+		i++;
 	}
 	return (val);
 }
