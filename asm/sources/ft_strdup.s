@@ -15,6 +15,7 @@
 	extern _malloc
 
 _ft_strdup:
+	export			16, 0
 	cmp			rdi, 0
 	je			exit
 	push		rdi
@@ -34,4 +35,5 @@ _ft_strdup:
 	mov			byte [rdi + rcx], 0
 	
 exit:
+	leave
 	ret
