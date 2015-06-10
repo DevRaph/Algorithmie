@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tool.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinet <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: rpinet <rpinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/17 18:58:20 by rpinet            #+#    #+#             */
-/*   Updated: 2015/03/18 13:11:58 by rpinet           ###   ########.fr       */
+/*   Updated: 2015/03/19 15:18:18 by rpinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,19 @@ int					ft_isint(char *s)
 	while (s[b] == '0' || s[b] == '-' || s[b] == '+')
 		b++;
 	tab = ft_strdup("2147483647");
-	//a = ((s[0] == '-' || s[0] == '+') && ft_strlen(s) - b <= 10) ? b : 0;
 	a = b;
 	if (((ft_strlen(s) - a) > 10) || (ft_strlen(s) <= 1 && s[0] == '-'))
 		return (0);
 	if ((ft_strlen(s) - a) == 10 && s[0] == '-')
 		tab[9] = (a == 1) ? '8' : '7';
-	i = -1 + a;
-	while (s && s[++i] != '\0')
+	i = 0 + a;
+	while (s && s[i++] != '\0')
 	{
-		if (!ft_isdigit(s[i]))
+		if (!ft_isdigit(s[i - 1]))
 			return (0);
-		if ((ft_strlen(s) - a) == 10 && (s[i] > tab[i - a]))
+		if ((ft_strlen(s) - a) == 10 && (s[i - 1] > tab[i - 1 - a]))
 			return (0);
-		if ((ft_strlen(s) - a) == 10 && (s[i] < tab[i - a]))
+		if ((ft_strlen(s) - a) == 10 && (s[i - 1] < tab[i - 1 - a]))
 			return (1);
 	}
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: rpinet <rpinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/17 19:03:19 by rpinet            #+#    #+#             */
-/*   Updated: 2015/03/18 18:00:49 by rpinet           ###   ########.fr       */
+/*   Updated: 2015/03/19 14:49:40 by rpinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,12 @@ void				ft_checktail(t_stack pa, t_stack pb, int *nb)
 	if (pa.nb > 2 && i && pa.nb != 3 && pa.size >= 5)
 	{
 		*nb += ft_rotate_r(&pa, &pb, 'a');
-		ft_print(pa, pb, "rra", "not");
 		*nb += ft_rotate_r(&pa, &pb, 'a');
-		ft_print(pa, pb, "rra", "not");
 		*nb += ft_swaps(pa, '1');
 		ft_putchar(10 + (!ft_issort(pa, 0) || pb.nb) * 22);
 		ft_print(pa, pb, "sa", "not");
 		*nb += ft_rotate(&pa, &pb, 'a');
-		ft_print(pa, pb, "ra", "not");
 		*nb += ft_rotate(&pa, &pb, 'a');
-		ft_print(pa, pb, "ra", "not");
 	}
 }
 
@@ -65,24 +61,15 @@ static void			ft_first_part(t_stack *pa, t_stack *pb, int *nb)
 {
 	while (pa->nb > 0 && !ft_issort(*pa, 0))
 	{
-		if (pa->tab[pa->nb - 2] > pa->tab[pa->nb - 1] && (pa->size != 5))
+		if (pa->tab[pa->nb - 2] > pa->tab[pa->nb - 1])
 			ft_checkend(*pa, *pb, nb);
 		if (ft_maxmin(pa->tab, pa->nb, 1) == (pa->nb - 1))
-		{
-			*nb += ft_rotate(pa, pb, 'a');
-			ft_print(*pa, *pb, "ra", "not");
-		}
+			*nb += ft_rotate_r(pa, pb, 'a');
 		ft_checkend(*pa, *pb, nb);
 		if (ft_maxmin(pa->tab, pa->nb, 1) == (pa->nb - 1))
-		{
 			*nb += ft_rotate(pa, pb, 'a');
-			ft_print(*pa, *pb, "ra", "not");
-		}
 		else if (!ft_issort(*pa, 0))
-		{
 			*nb += ft_push(pa, pb, 'b');
-			ft_print(*pa, *pb, "not", "pb");
-		}
 	}
 }
 
@@ -90,27 +77,25 @@ void				ft_test(t_stack pa, t_stack pb, int *nb)
 {
 	int				i;
 
+	if (pa.tab[pa.nb - 1] > pa.tab[0])
+		*nb += ft_rotate(&pa, &pb, 'a');
+	ft_checktail(pa, pb, nb);
+	if (!ft_issort(pa, 0) && pa.nb != 3)
+		ft_checkend(pa, pb, nb);
 	ft_first_part(&pa, &pb, nb);
 	i = 0;
 	while (pb.nb > 0)
 	{
-		//ft_checkend(pa, pb, nb);
+		ft_checkend(pa, pb, nb);
 		i = ft_maxmin(pb.tab, pb.nb, 1);
 		if (i < (pb.nb / 2) && pb.nb > 2)
 			while (i-- >= 0)
-			{
 				*nb += ft_rotate_r(&pa, &pb, 'b');
-				ft_print(pa, pb, "not", "rrb");
-			}
 		else
 		{
 			while (i++ < (pb.nb - 1))
-			{
 				*nb += ft_rotate(&pa, &pb, 'b');
-				ft_print(pa, pb, "not", "rb");
-			}
 		}
 		*nb += ft_push(&pa, &pb, 'a');
-		ft_print(pa, pb, "pa", "not");
 	}
 }

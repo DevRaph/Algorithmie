@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_rotate.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinet <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: rpinet <rpinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/17 18:57:34 by rpinet            #+#    #+#             */
-/*   Updated: 2015/03/17 18:57:40 by rpinet           ###   ########.fr       */
+/*   Updated: 2015/03/19 14:35:10 by rpinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static void			ft_swap_rot(t_stack *p, int i, int a)
 int					ft_rotate(t_stack *pa, t_stack *pb, char o)
 {
 	int				i;
+	char			*s;
 
 	if (o == 'a' || o == 'r')
 	{
@@ -37,15 +38,21 @@ int					ft_rotate(t_stack *pa, t_stack *pb, char o)
 		while (i-- > 0)
 			ft_swap_rot(pb, i, i + 1);
 		if (o != 'r')
-			ft_putstr("rb");
+			ft_putstr((o == 'r') ? "" : "rb");
 	}
 	ft_putchar(10 + (!ft_issort(*pa, 0) || pb->nb) * 22);
+	s = (o == 'a') ? "ra" : "not";
+	if (pa->opt[VB] == '1' && o == 'r')
+		ft_print(*pa, *pb, "rrr", "rrr");
+	else if (pa->opt[VB] == '1')
+		ft_print(*pa, *pb, s, (o == 'b') ? "rb" : "not");
 	return (1);
 }
 
 int					ft_rotate_r(t_stack *pa, t_stack *pb, char o)
 {
 	int				i;
+	char			*s;
 
 	if (o == 'a' || o == 'r')
 	{
@@ -60,8 +67,13 @@ int					ft_rotate_r(t_stack *pa, t_stack *pb, char o)
 		while (i++ < (pb->nb - 1))
 			ft_swap_rot(pb, i, i - 1);
 		if (o != 'r')
-			ft_putstr("rrb");
+			ft_putstr((o == 'r') ? "" : "rrb");
 	}
 	ft_putchar(10 + (!ft_issort(*pa, 0) || pb->nb) * 22);
+	s = (o == 'a') ? "rra" : "not";
+	if (pa->opt[VB] == '1' && o == 'r')
+		ft_print(*pa, *pb, "rrr", "rrr");
+	else if (pa->opt[VB] == '1')
+		ft_print(*pa, *pb, s, (o == 'b') ? "rrb" : "not");
 	return (1);
 }

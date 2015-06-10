@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_stack.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpinet <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: rpinet <rpinet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/03/17 18:57:50 by rpinet            #+#    #+#             */
-/*   Updated: 2015/03/17 18:57:55 by rpinet           ###   ########.fr       */
+/*   Updated: 2015/03/19 14:35:33 by rpinet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,17 @@ void			ft_print_stack(t_stack p, char *s)
 
 	col = (p.opt[COL] == '1') ? 1 : 0;
 	ft_print_name(p.name);
+	if (!ft_strncmp(s, "rr", 2) && col)
+		ft_setfgcolor((s[2] == 'b') ? 35 : 36);
+	else if (!ft_strncmp(s, "r", 1) && col && (s[1] == 'a' || s[1] == 'b'))
+		ft_setfgcolor((s[1] == 'b') ? 75 : 76);
 	i = -1;
-	if (!ft_strncmp(s, "r", 1) && col)
-		ft_setfgcolor(76);
 	while (i++ < (p.nb - 1))
 	{
 		if (!ft_strncmp(s, "ss", 2) && i >= (p.nb - 2) && col)
-			ft_setfgcolor(27);
+			ft_setfgcolor(220);
 		else if (!ft_strncmp(s, "s", 1) && i >= (p.nb - 2) && col)
-			ft_setfgcolor(27);
+			ft_setfgcolor(220);
 		if (!ft_strncmp(s, "p", 1) && i >= (p.nb - 1) && col)
 			ft_setfgcolor(202);
 		ft_putnbr(p.tab[i]);
